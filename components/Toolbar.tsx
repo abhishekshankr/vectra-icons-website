@@ -28,9 +28,9 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
       <style>{`
         /* Mobile: three rows */
         .tb { border-bottom: 1px solid var(--border); background: var(--canvas); position: sticky; top: 52px; z-index: 10; }
-        .tb-row1 { display: flex; align-items: center; gap: 8px; padding: 0 16px; height: 48px; }
-        .tb-row2 { display: flex; align-items: center; gap: 10px; padding: 0 16px 12px; }
-        .tb-row3 { padding: 0 16px 12px; }
+        .tb-row1 { display: flex; align-items: center; gap: 8px; padding: 0 24px; height: 48px; max-width: 1280px; margin: 0 auto; }
+        .tb-row2 { display: flex; align-items: center; gap: 10px; padding: 0 24px 12px; max-width: 1280px; margin: 0 auto; }
+        .tb-row3 { padding: 0 24px 12px; max-width: 1280px; margin: 0 auto; }
         .tb-search-desktop { display: none; }
         .tb-spacer { display: none; }
 

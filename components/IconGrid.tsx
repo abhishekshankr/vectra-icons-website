@@ -45,7 +45,7 @@ export default function IconGrid({ icons, style, size, onSelectIcon }: Props) {
   return (
     <div style={{
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(96px, 1fr))',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(112px, 1fr))',
       gap: '2px',
     }}>
       {icons.map((icon) => (

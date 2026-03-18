@@ -35,7 +35,7 @@ export default function IconCard({ icon, style, size, onClick }: Props) {
         background: hovered ? 'var(--canvas-2)' : 'transparent',
         cursor: 'pointer',
         transition: 'all 0.12s ease',
-        boxShadow: hovered ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
+        boxShadow: hovered ? '0 2px 8px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0)',
         position: 'relative',
       }}
     >

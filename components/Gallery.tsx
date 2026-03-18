@@ -30,16 +30,15 @@ export default function Gallery({ icons }: Props) {
       <header style={{
         background: 'var(--chrome)',
         borderBottom: '1px solid var(--border-chrome)',
-        padding: '0 24px',
         height: '52px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
         position: 'sticky',
         top: 0,
         zIndex: 20,
         flexShrink: 0,
+        display: 'flex',
+        justifyContent: 'center',
       }}>
+      <div style={{ width: '100%', maxWidth: '1280px', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{
             fontFamily: 'var(--font-mono)',
@@ -70,6 +69,7 @@ export default function Gallery({ icons }: Props) {
             ? `${icons.length} icons`
             : `${filteredIcons.length} / ${icons.length}`}
         </span>
+      </div>
       </header>
 
       <Toolbar
@@ -81,7 +81,7 @@ export default function Gallery({ icons }: Props) {
         onQueryChange={setQuery}
       />
 
-      <main style={{ flex: 1, padding: '24px' }}>
+      <main style={{ flex: 1, padding: '24px', maxWidth: '1280px', width: '100%', margin: '0 auto', boxSizing: 'border-box' }}>
         <IconGrid
           icons={filteredIcons}
           style={style}
