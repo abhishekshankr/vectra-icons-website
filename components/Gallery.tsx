@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useLayoutEffect } from 'react';
 import { IconRecord, IconStyle } from '@/lib/types';
 import { createFuseIndex, searchIcons } from '@/lib/search';
 import Toolbar from './Toolbar';
@@ -16,17 +16,12 @@ export default function Gallery({ icons }: Props) {
   const [size, setSize] = useState(32);
   const [query, setQuery] = useState('');
   const [selectedIcon, setSelectedIcon] = useState<IconRecord | null>(null);
-  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() =>
+    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
 
-  // Read system preference once on mount
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    setTheme(mq.matches ? 'dark' : 'light');
-  }, []);
-
-  // Apply theme to <html>
-  useEffect(() => {
-    if (theme) document.documentElement.setAttribute('data-theme', theme);
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');

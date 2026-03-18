@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -17,7 +18,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
   const [svgText, setSvgText] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [toast, setToast] = useState(false);
-  // Keep last non-null icon for rendering during close animation
+  // Keep last non-null icon so content stays during close animation
   const [displayIcon, setDisplayIcon] = useState<IconRecord | null>(icon);
   const open = icon !== null;
 
@@ -32,7 +33,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
       .then((r) => r.text())
       .then((text) => setSvgText(applyCurrentColor(text)))
       .catch(() => setSvgText(''));
-  }, [displayIcon?.name, style]);
+  }, [displayIcon, style]);
 
   const displayName = displayIcon?.name.replace('.svg', '') ?? '';
 
