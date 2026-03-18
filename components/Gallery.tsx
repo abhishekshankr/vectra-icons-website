@@ -90,14 +90,12 @@ export default function Gallery({ icons }: Props) {
         />
       </main>
 
-      {selectedIcon && (
-        <IconDetailModal
-          icon={selectedIcon}
-          style={style}
-          size={size}
-          onClose={() => setSelectedIcon(null)}
-        />
-      )}
+      <IconDetailModal
+        icon={selectedIcon}
+        style={style}
+        size={size}
+        onClose={() => setSelectedIcon(null)}
+      />
     </div>
   );
 }

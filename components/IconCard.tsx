@@ -46,8 +46,7 @@ export default function IconCard({ icon, style, size, onClick }: Props) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        opacity: hovered ? 1 : 0.7,
-        transition: 'opacity 0.12s ease',
+        opacity: 1,
       }}>
         <InlineSvgIcon url={src} size={size} className="icon-img" />
       </div>
@@ -55,7 +54,7 @@ export default function IconCard({ icon, style, size, onClick }: Props) {
       <span style={{
         fontFamily: 'var(--font-mono)',
         fontSize: '9.5px',
-        color: hovered ? 'var(--ink)' : 'var(--ink-3)',
+        color: 'var(--ink-3)',
         letterSpacing: '0.02em',
         maxWidth: '80px',
         overflow: 'hidden',

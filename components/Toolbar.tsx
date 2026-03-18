@@ -28,7 +28,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
       <style>{`
         /* Mobile: three rows */
         .tb { border-bottom: 1px solid var(--border); background: var(--canvas); position: sticky; top: 52px; z-index: 10; }
-        .tb-row1 { display: flex; align-items: center; gap: 8px; padding: 0 24px; height: 48px; max-width: 1280px; margin: 0 auto; }
+        .tb-row1 { display: flex; align-items: center; gap: 8px; padding: 0 24px; height: 64px; max-width: 1280px; margin: 0 auto; }
         .tb-row2 { display: flex; align-items: center; gap: 10px; padding: 0 24px 12px; max-width: 1280px; margin: 0 auto; }
         .tb-row3 { padding: 0 24px 12px; max-width: 1280px; margin: 0 auto; }
         .tb-search-desktop { display: none; }
@@ -49,7 +49,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
         {/* Row 1: style toggle + inline size (desktop) + search (desktop) */}
         <div className="tb-row1">
           {/* Style toggle */}
-          <div style={{ display: 'flex', alignItems: 'stretch', height: '28px', gap: '4px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'stretch', height: '36px', gap: '4px', flexShrink: 0 }}>
             {(['Stroke', 'Fill'] as IconStyle[]).map((s) => (
               <button
                 key={s}
@@ -102,7 +102,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
               placeholder="Search 313 icons…"
               defaultValue={query}
               onChange={handleQueryChange}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.03em', paddingLeft: '30px', paddingRight: '12px', height: '28px', width: '220px', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--canvas-2)', color: 'var(--ink)', outline: 'none' }}
+              style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.03em', paddingLeft: '30px', paddingRight: '12px', height: '36px', width: '220px', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--canvas-2)', color: 'var(--ink)', outline: 'none' }}
               onFocus={(e) => { e.target.style.borderColor = 'var(--ink-2)'; e.target.style.background = 'var(--canvas)'; }}
               onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.background = 'var(--canvas-2)'; }}
             />
@@ -135,7 +135,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
               placeholder="Search 313 icons…"
               defaultValue={query}
               onChange={handleQueryChange}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.03em', paddingLeft: '30px', paddingRight: '12px', height: '32px', width: '100%', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--canvas-2)', color: 'var(--ink)', outline: 'none' }}
+              style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.03em', paddingLeft: '30px', paddingRight: '12px', height: '36px', width: '100%', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--canvas-2)', color: 'var(--ink)', outline: 'none' }}
               onFocus={(e) => { e.target.style.borderColor = 'var(--ink-2)'; e.target.style.background = 'var(--canvas)'; }}
               onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.background = 'var(--canvas-2)'; }}
             />
