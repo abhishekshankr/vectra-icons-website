@@ -13,6 +13,7 @@
   --accent-dim: #b34d1f;
   --border:     rgba(26,25,22,0.12);
   --border-chrome: rgba(255,255,255,0.08);
+  --hover-fill: rgba(26,25,22,0.04);
   --radius-sm:  4px;
   --radius-md:  8px;
   --font-display: 'Instrument Sans', sans-serif;
@@ -30,6 +31,7 @@
     --chrome-2:   #161513;
     --chrome-3:   #1e1d1b;
     --border:     rgba(240,237,232,0.1);
+    --hover-fill: rgba(240,237,232,0.06);
   }
 }
 
@@ -84,3 +86,11 @@ input[type="search"]::-webkit-search-cancel-button { display: none; }
 /* Icons use currentColor — color follows --ink in both light and dark mode */
 .icon-img { color: var(--ink); }
 .icon-img svg { display: block; }
+
+/* Icon grid */
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 2px; }
+
+@media (min-width: 600px) {
+  .icon-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .icon-card { padding: 16px !important; aspect-ratio: 1; justify-content: center; }
+}

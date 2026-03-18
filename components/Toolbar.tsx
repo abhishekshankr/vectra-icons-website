@@ -21,7 +21,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
     debounceRef.current = setTimeout(() => onQueryChange(value), 200);
   }, [onQueryChange]);
 
-  const pct = ((size - 16) / (64 - 16)) * 100;
+  const pct = ((size - 20) / (64 - 20)) * 100;
 
   return (
     <>
@@ -83,7 +83,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
             <div style={{ position: 'relative', width: '100px', height: '10px', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
               <div style={{ position: 'absolute', left: 0, right: 0, height: '1px', background: 'var(--ink-3)', borderRadius: '1px' }} />
               <div style={{ position: 'absolute', left: 0, height: '1px', width: `${pct}%`, background: 'var(--accent)', borderRadius: '1px' }} />
-              <input type="range" min={16} max={64} step={4} value={size} onChange={(e) => onSizeChange(Number(e.target.value))} style={{ position: 'absolute', left: 0, right: 0, width: '100%', margin: 0 }} />
+              <input type="range" min={20} max={64} step={4} value={size} onChange={(e) => onSizeChange(Number(e.target.value))} style={{ position: 'absolute', left: 0, right: 0, width: '100%', margin: 0 }} />
             </div>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink)', letterSpacing: '0.03em', minWidth: '36px', flexShrink: 0 }}>
               {size}px
@@ -117,7 +117,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
           <div style={{ position: 'relative', flex: 1, height: '10px', display: 'flex', alignItems: 'center' }}>
             <div style={{ position: 'absolute', left: 0, right: 0, height: '1px', background: 'var(--ink-3)', borderRadius: '1px' }} />
             <div style={{ position: 'absolute', left: 0, height: '1px', width: `${pct}%`, background: 'var(--accent)', borderRadius: '1px' }} />
-            <input type="range" min={16} max={64} step={4} value={size} onChange={(e) => onSizeChange(Number(e.target.value))} style={{ position: 'absolute', left: 0, right: 0, width: '100%', margin: 0 }} />
+            <input type="range" min={20} max={64} step={4} value={size} onChange={(e) => onSizeChange(Number(e.target.value))} style={{ position: 'absolute', left: 0, right: 0, width: '100%', margin: 0 }} />
           </div>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink)', letterSpacing: '0.03em', minWidth: '36px', flexShrink: 0 }}>
             {size}px

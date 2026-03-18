@@ -23,6 +23,7 @@ export default function IconCard({ icon, style, size, onClick }: Props) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       title={displayName}
+      className="icon-card"
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -32,14 +33,13 @@ export default function IconCard({ icon, style, size, onClick }: Props) {
         border: '1px solid',
         borderColor: hovered ? 'var(--ink-3)' : 'transparent',
         borderRadius: 'var(--radius-md)',
-        background: hovered ? 'var(--canvas-2)' : 'transparent',
+        background: hovered ? 'var(--hover-fill)' : 'transparent',
         cursor: 'pointer',
         transition: 'all 0.12s ease',
-        boxShadow: hovered ? '0 2px 8px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0)',
+        boxShadow: 'none',
         position: 'relative',
       }}
     >
-      {/* Icon preview */}
       <div style={{
         width: Math.max(size, 32),
         height: Math.max(size, 32),
@@ -49,14 +49,9 @@ export default function IconCard({ icon, style, size, onClick }: Props) {
         opacity: hovered ? 1 : 0.7,
         transition: 'opacity 0.12s ease',
       }}>
-        <InlineSvgIcon
-          url={src}
-          size={size}
-          className="icon-img"
-        />
+        <InlineSvgIcon url={src} size={size} className="icon-img" />
       </div>
 
-      {/* Name */}
       <span style={{
         fontFamily: 'var(--font-mono)',
         fontSize: '9.5px',

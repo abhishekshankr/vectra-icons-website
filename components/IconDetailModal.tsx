@@ -17,6 +17,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
   const [svgText, setSvgText] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [toast, setToast] = useState(false);
   const displayName = icon.name.replace('.svg', '');
 
   useEffect(() => {
@@ -41,6 +42,13 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
     setDownloading(true);
     await downloadIcon(icon.name, style, size, svgText ?? undefined);
     setDownloading(false);
+  };
+
+  const handleCopy = async () => {
+    if (!svgText) return;
+    await navigator.clipboard.writeText(svgText);
+    setToast(true);
+    setTimeout(() => setToast(false), 2000);
   };
 
   return (
@@ -213,13 +221,14 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
           </div>
         )}
 
-        {/* Download */}
-        <div style={{ padding: '16px 20px 20px' }}>
+        {/* Actions */}
+        <div style={{ padding: '16px 20px 20px', display: 'flex', gap: '8px' }}>
+          {/* Download */}
           <button
             onClick={handleDownload}
             disabled={downloading || !svgText}
             style={{
-              width: '100%',
+              flex: 1,
               height: '40px',
               fontFamily: 'var(--font-mono)',
               fontSize: '11px',
@@ -231,21 +240,79 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
               color: 'white',
               cursor: downloading || !svgText ? 'not-allowed' : 'pointer',
               transition: 'background 0.15s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
             }}
-            onMouseEnter={(e) => {
-              if (!downloading && svgText) {
-                (e.target as HTMLButtonElement).style.background = 'var(--accent-dim)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!downloading && svgText) {
-                (e.target as HTMLButtonElement).style.background = 'var(--accent)';
-              }
-            }}
+            onMouseEnter={(e) => { if (!downloading && svgText) (e.currentTarget.style.background = 'var(--accent-dim)'); }}
+            onMouseLeave={(e) => { if (!downloading && svgText) (e.currentTarget.style.background = 'var(--accent)'); }}
           >
-            {downloading ? 'Downloading…' : `↓ Download ${size}px SVG`}
+            {!downloading && (
+              <svg width="14" height="14" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M16 26a1 1 0 0 1-.712-.297l-8-8.106a1 1 0 0 1 1.424-1.405L15 22.563V7a1 1 0 1 1 2 0v15.563l6.288-6.371a1 1 0 1 1 1.424 1.405l-8 8.105A1 1 0 0 1 16 26Z" fill="white" />
+              </svg>
+            )}
+            {downloading ? 'Downloading…' : `Download ${size}px SVG`}
+          </button>
+
+          {/* Copy SVG */}
+          <button
+            onClick={handleCopy}
+            disabled={!svgText}
+            style={{
+              height: '40px',
+              flexShrink: 0,
+              padding: '0 14px',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-sm)',
+              background: 'var(--canvas-2)',
+              color: 'var(--ink)',
+              cursor: !svgText ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              transition: 'background 0.15s ease',
+              whiteSpace: 'nowrap',
+            }}
+            onMouseEnter={(e) => { if (svgText) (e.currentTarget.style.background = 'var(--canvas)'); }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--canvas-2)'; }}
+          >
+            <svg width="14" height="14" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" clipRule="evenodd" d="M8 4a4 4 0 0 0-4 4v9a4 4 0 0 0 4 4h9a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4H8ZM6 8a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8Z" fill="currentColor" />
+              <path d="M24 10a1 1 0 1 0 0 2 2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2 1 1 0 1 0-2 0 4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V14a4 4 0 0 0-4-4Z" fill="currentColor" />
+            </svg>
+            Copy SVG
           </button>
         </div>
+      </div>
+
+      {/* Toast */}
+      <div style={{
+        position: 'fixed',
+        bottom: '32px',
+        left: '50%',
+        transform: `translateX(-50%) translateY(${toast ? 0 : '12px'})`,
+        opacity: toast ? 1 : 0,
+        transition: 'opacity 0.2s ease, transform 0.2s ease',
+        pointerEvents: 'none',
+        background: 'var(--chrome)',
+        color: 'rgba(255,255,255,0.9)',
+        fontFamily: 'var(--font-mono)',
+        fontSize: '11px',
+        letterSpacing: '0.04em',
+        padding: '8px 16px',
+        borderRadius: 'var(--radius-md)',
+        whiteSpace: 'nowrap',
+        zIndex: 100,
+        border: '1px solid var(--border-chrome)',
+      }}>
+        Copied {displayName} to clipboard
       </div>
 
       <style>{`
