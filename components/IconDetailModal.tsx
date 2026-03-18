@@ -45,7 +45,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
 
   const handleDownload = async () => {
     setDownloading(true);
-    await downloadIcon(displayIcon.name, style, size, svgText ?? undefined);
+    await downloadIcon(displayIcon!.name, style, size, svgText ?? undefined);
     setDownloading(false);
   };
 
