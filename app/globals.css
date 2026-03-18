@@ -21,7 +21,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --canvas:     #1a1916;
     --canvas-2:   #232220;
     --ink:        #f0ede8;
@@ -33,6 +33,19 @@
     --border:     rgba(240,237,232,0.1);
     --hover-fill: rgba(240,237,232,0.06);
   }
+}
+
+[data-theme="dark"] {
+  --canvas:     #1a1916;
+  --canvas-2:   #232220;
+  --ink:        #f0ede8;
+  --ink-2:      #9e9b96;
+  --ink-3:      #5a5854;
+  --chrome:     #0d0c0b;
+  --chrome-2:   #161513;
+  --chrome-3:   #1e1d1b;
+  --border:     rgba(240,237,232,0.1);
+  --hover-fill: rgba(240,237,232,0.06);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
