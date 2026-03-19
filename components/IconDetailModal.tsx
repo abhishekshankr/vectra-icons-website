@@ -148,75 +148,82 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
             </button>
           </div>
 
-          {/* Body: horizontal layout on desktop */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
+          <style>{`
+            .modal-body { display: flex; flex-direction: row; align-items: stretch; }
+            .modal-preview {
+              display: flex; align-items: center; justify-content: center;
+              padding: 28px 20px;
+              background: var(--canvas);
+              background-image: radial-gradient(circle, var(--canvas-2) 1px, transparent 1px);
+              background-size: 20px 20px;
+              flex-shrink: 0;
+              border-right: 1px solid var(--border);
+            }
+            .modal-info { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 16px; gap: 8px; min-width: 0; }
+            .modal-actions { display: flex; gap: 8px; align-items: center; }
+            .modal-copy-label { display: none; }
+            @media (min-width: 600px) {
+              .modal-preview { padding: 32px 40px; }
+              .modal-info { padding: 20px 24px; gap: 12px; }
+              .modal-copy-label { display: inline; }
+            }
+          `}</style>
 
-            {/* Preview area */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '32px 40px',
-              background: 'var(--canvas)',
-              backgroundImage: 'radial-gradient(circle, var(--canvas-2) 1px, transparent 1px)',
-              backgroundSize: '20px 20px',
-              flexShrink: 0,
-              borderRight: '1px solid var(--border)',
-            }}>
+          {/* Body */}
+          <div className="modal-body">
+
+            {/* Preview */}
+            <div className="modal-preview">
               {svgText === null ? (
-                <div style={{
-                  width: 64, height: 64,
-                  borderRadius: 8,
-                  background: 'var(--canvas-2)',
-                  animation: 'pulse 1.5s ease-in-out infinite',
-                }} />
+                <div style={{ width: 48, height: 48, borderRadius: 8, background: 'var(--canvas-2)', animation: 'pulse 1.5s ease-in-out infinite' }} />
               ) : svgText === '' ? (
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-3)' }}>
-                  Failed to load
-                </span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-3)' }}>Failed to load</span>
               ) : (
-                <div
-                  className="icon-img"
-                  style={{ width: 64, height: 64 }}
-                  dangerouslySetInnerHTML={{ __html: svgText }}
-                />
+                <div className="icon-img" style={{ width: 48, height: 48 }} dangerouslySetInnerHTML={{ __html: svgText }} />
               )}
             </div>
 
             {/* Info + actions */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '20px 24px', gap: '12px' }}>
-              <div>
+            <div className="modal-info">
+              <div style={{ minWidth: 0 }}>
                 <h2 style={{
                   fontFamily: 'var(--font-display)',
                   fontWeight: 600,
-                  fontSize: '18px',
+                  fontSize: '15px',
                   color: 'var(--ink)',
                   letterSpacing: '-0.01em',
-                  marginBottom: '4px',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
                 }}>
                   {displayName}
                 </h2>
                 {displayIcon.description && (
                   <p style={{
                     fontFamily: 'var(--font-display)',
-                    fontSize: '13px',
+                    fontSize: '12px',
                     color: 'var(--ink-2)',
-                    lineHeight: 1.5,
+                    lineHeight: 1.4,
+                    marginTop: '2px',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
                   }}>
                     {displayIcon.description}
                   </p>
                 )}
               </div>
 
-              {/* Tags */}
+              {/* Tags — hidden on mobile to save space */}
               {displayIcon.tags?.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
                   {displayIcon.tags.map((tag) => (
                     <span key={tag} style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: '10px',
                       letterSpacing: '0.04em',
-                      padding: '3px 8px',
+                      padding: '2px 6px',
                       border: '1px solid var(--border)',
                       borderRadius: '3px',
                       color: 'var(--ink-2)',
@@ -229,14 +236,14 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
               )}
 
               {/* Actions */}
-              <div style={{ display: 'flex', gap: '8px' }}>
+              <div className="modal-actions">
                 {/* Download */}
                 <button
                   onClick={handleDownload}
                   disabled={downloading || !svgText}
                   style={{
                     flex: 1,
-                    height: '40px',
+                    height: '36px',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '11px',
                     letterSpacing: '0.08em',
@@ -250,27 +257,30 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '8px',
+                    gap: '6px',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
                   }}
                   onMouseEnter={(e) => { if (!downloading && svgText) (e.currentTarget.style.background = 'var(--accent-dim)'); }}
                   onMouseLeave={(e) => { if (!downloading && svgText) (e.currentTarget.style.background = 'var(--accent)'); }}
                 >
                   {!downloading && (
-                    <svg width="14" height="14" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="13" height="13" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
                       <path fillRule="evenodd" clipRule="evenodd" d="M16 26a1 1 0 0 1-.712-.297l-8-8.106a1 1 0 0 1 1.424-1.405L15 22.563V7a1 1 0 1 1 2 0v15.563l6.288-6.371a1 1 0 1 1 1.424 1.405l-8 8.105A1 1 0 0 1 16 26Z" fill="white" />
                     </svg>
                   )}
-                  {downloading ? 'Downloading…' : `Download ${size}px SVG`}
+                  {downloading ? 'Downloading…' : `Download ${size}px`}
                 </button>
 
-                {/* Copy SVG */}
+                {/* Copy SVG — icon only on mobile */}
                 <button
                   onClick={handleCopy}
                   disabled={!svgText}
+                  aria-label="Copy SVG"
                   style={{
-                    height: '40px',
+                    height: '36px',
                     flexShrink: 0,
-                    padding: '0 14px',
+                    padding: '0 12px',
                     border: '1px solid var(--border)',
                     borderRadius: 'var(--radius-sm)',
                     background: 'var(--canvas-2)',
@@ -290,11 +300,11 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                   onMouseEnter={(e) => { if (svgText) (e.currentTarget.style.background = 'var(--canvas)'); }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--canvas-2)'; }}
                 >
-                  <svg width="14" height="14" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="13" height="13" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M8 4a4 4 0 0 0-4 4v9a4 4 0 0 0 4 4h9a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4H8ZM6 8a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8Z" fill="currentColor" />
                     <path d="M24 10a1 1 0 1 0 0 2 2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2 1 1 0 1 0-2 0 4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V14a4 4 0 0 0-4-4Z" fill="currentColor" />
                   </svg>
-                  Copy SVG
+                  <span className="modal-copy-label">Copy SVG</span>
                 </button>
               </div>
             </div>

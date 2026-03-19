@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, useLayoutEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { IconRecord, IconStyle } from '@/lib/types';
 import { createFuseIndex, searchIcons } from '@/lib/search';
 import Toolbar from './Toolbar';
@@ -16,15 +16,30 @@ export default function Gallery({ icons }: Props) {
   const [size, setSize] = useState(32);
   const [query, setQuery] = useState('');
   const [selectedIcon, setSelectedIcon] = useState<IconRecord | null>(null);
-  const [theme, setTheme] = useState<'light' | 'dark'>(() =>
-    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  );
+  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
+  const [manualOverride, setManualOverride] = useState(false);
 
-  useLayoutEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    // Set initial theme from system
+    setTheme(mq.matches ? 'dark' : 'light');
+    // Follow system changes unless user has manually overridden
+    const handler = (e: MediaQueryListEvent) => {
+      if (!manualOverride) setTheme(e.matches ? 'dark' : 'light');
+    };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (theme) document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
+  const toggleTheme = () => {
+    setManualOverride(true);
+    setTheme(t => t === 'dark' ? 'light' : 'dark');
+  };
 
   const fuse = useMemo(() => createFuseIndex(icons), [icons]);
 
@@ -65,7 +80,7 @@ export default function Gallery({ icons }: Props) {
             color: 'rgba(255,255,255,0.3)',
             letterSpacing: '0.05em',
           }}>
-            v1.0
+            v1.6.2
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -105,7 +120,7 @@ export default function Gallery({ icons }: Props) {
               e.currentTarget.style.color = 'rgba(255,255,255,0.6)';
             }}
           >
-            {theme === 'dark' ? (
+            {theme === null ? null : theme === 'dark' ? (
               /* Sun */
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="4" />

@@ -74,6 +74,7 @@ input[type="range"] {
   cursor: pointer;
   height: 10px;
   padding: 0;
+  touch-action: pan-x;
 }
 input[type="range"]::-webkit-slider-runnable-track {
   height: 10px;
@@ -81,12 +82,18 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--accent);
   margin-top: 0;
   transition: transform 0.15s ease;
+}
+@media (min-width: 600px) {
+  input[type="range"]::-webkit-slider-thumb {
+    width: 10px;
+    height: 10px;
+  }
 }
 input[type="range"]:hover::-webkit-slider-thumb {
   transform: scale(1.2);

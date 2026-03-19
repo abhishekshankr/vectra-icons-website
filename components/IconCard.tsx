@@ -29,7 +29,7 @@ export default function IconCard({ icon, style, size, onClick }: Props) {
         flexDirection: 'column',
         alignItems: 'center',
         gap: '8px',
-        padding: '12px 8px',
+        padding: '20px 8px',
         border: '1px solid',
         borderColor: hovered ? 'var(--ink-3)' : 'transparent',
         borderRadius: 'var(--radius-md)',

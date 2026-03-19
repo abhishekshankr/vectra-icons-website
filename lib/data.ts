@@ -13,3 +13,4 @@ export async function fetchIconList(): Promise<IconRecord[]> {
   if (!res.ok) throw new Error(`Failed to fetch metadata: ${res.status}`);
   return res.json();
 }
+
