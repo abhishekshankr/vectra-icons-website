@@ -11,14 +11,15 @@ export function createFuseIndex(icons: IconRecord[]): Fuse<SearchableIcon> {
 
   return new Fuse(searchable, {
     keys: [
-      { name: 'displayName', weight: 0.5 },
-      { name: 'tags', weight: 0.25 },
-      { name: 'aliases', weight: 0.15 },
-      { name: 'description', weight: 0.05 },
-      { name: 'category', weight: 0.05 },
+      { name: 'displayName', weight: 0.45 },
+      { name: 'aliases', weight: 0.25 },
+      { name: 'tags', weight: 0.20 },
+      { name: 'description', weight: 0.07 },
+      { name: 'category', weight: 0.03 },
     ],
-    threshold: 0.35,
+    threshold: 0.2,
     ignoreLocation: true,
+    minMatchCharLength: 2,
   });
 }
 

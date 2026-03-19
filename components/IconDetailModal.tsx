@@ -96,17 +96,17 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{
-                fontFamily: 'var(--font-mono)',
+                fontFamily: 'var(--font-display)',
                 fontSize: '10px',
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
                 color: 'var(--ink-3)',
               }}>
-                {style}
+                {style === 'Stroke' ? 'Outline' : style}
               </span>
               <span style={{ color: 'var(--border)', fontSize: '10px' }}>·</span>
               <span style={{
-                fontFamily: 'var(--font-mono)',
+                fontFamily: 'var(--font-display)',
                 fontSize: '10px',
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
@@ -130,7 +130,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                 color: 'var(--ink-2)',
                 cursor: 'pointer',
                 fontSize: '12px',
-                fontFamily: 'var(--font-mono)',
+                fontFamily: 'var(--font-display)',
                 transition: 'all 0.1s ease',
               }}
               onMouseEnter={(e) => {
@@ -177,7 +177,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
               {svgText === null ? (
                 <div style={{ width: 48, height: 48, borderRadius: 8, background: 'var(--canvas-2)', animation: 'pulse 1.5s ease-in-out infinite' }} />
               ) : svgText === '' ? (
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink-3)' }}>Failed to load</span>
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: '11px', color: 'var(--ink-3)' }}>Failed to load</span>
               ) : (
                 <div className="icon-img" style={{ width: 48, height: 48 }} dangerouslySetInnerHTML={{ __html: svgText }} />
               )}
@@ -220,7 +220,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
                   {displayIcon.tags.map((tag) => (
                     <span key={tag} style={{
-                      fontFamily: 'var(--font-mono)',
+                      fontFamily: 'var(--font-display)',
                       fontSize: '10px',
                       letterSpacing: '0.04em',
                       padding: '2px 6px',
@@ -244,7 +244,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                   style={{
                     flex: 1,
                     height: '36px',
-                    fontFamily: 'var(--font-mono)',
+                    fontFamily: 'var(--font-display)',
                     fontSize: '11px',
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
@@ -269,7 +269,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                       <path fillRule="evenodd" clipRule="evenodd" d="M16 26a1 1 0 0 1-.712-.297l-8-8.106a1 1 0 0 1 1.424-1.405L15 22.563V7a1 1 0 1 1 2 0v15.563l6.288-6.371a1 1 0 1 1 1.424 1.405l-8 8.105A1 1 0 0 1 16 26Z" fill="white" />
                     </svg>
                   )}
-                  {downloading ? 'Downloading…' : `Download ${size}px`}
+                  {downloading ? 'Downloading…' : `Download ${size}px Icon`}
                 </button>
 
                 {/* Copy SVG — icon only on mobile */}
@@ -290,7 +290,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '6px',
-                    fontFamily: 'var(--font-mono)',
+                    fontFamily: 'var(--font-display)',
                     fontSize: '11px',
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
@@ -323,7 +323,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
         pointerEvents: 'none',
         background: 'var(--chrome)',
         color: 'rgba(255,255,255,0.9)',
-        fontFamily: 'var(--font-mono)',
+        fontFamily: 'var(--font-display)',
         fontSize: '11px',
         letterSpacing: '0.04em',
         padding: '8px 16px',
@@ -332,7 +332,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
         zIndex: 100,
         border: '1px solid var(--border-chrome)',
       }}>
-        Copied {displayName} to clipboard
+        Copied {displayName} icon to clipboard
       </div>
 
       <style>{`

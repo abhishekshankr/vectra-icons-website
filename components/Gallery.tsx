@@ -54,7 +54,7 @@ export default function Gallery({ icons }: Props) {
       <header style={{
         background: 'var(--chrome)',
         borderBottom: '1px solid var(--border-chrome)',
-        height: '52px',
+        height: '60px',
         position: 'sticky',
         top: 0,
         zIndex: 20,
@@ -63,19 +63,19 @@ export default function Gallery({ icons }: Props) {
         justifyContent: 'center',
       }}>
       <div style={{ width: '100%', maxWidth: '1280px', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
           <span style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            fontWeight: 500,
-            letterSpacing: '0.12em',
-            color: 'rgba(255,255,255,0.9)',
+            fontFamily: 'var(--font-display)',
+            fontSize: '20px',
+            fontWeight: 400,
+            letterSpacing: '-0.02em',
             textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.9)',
           }}>
             Vectra Icons
           </span>
           <span style={{
-            fontFamily: 'var(--font-mono)',
+            fontFamily: 'var(--font-display)',
             fontSize: '10px',
             color: 'rgba(255,255,255,0.3)',
             letterSpacing: '0.05em',
@@ -85,7 +85,7 @@ export default function Gallery({ icons }: Props) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <span style={{
-            fontFamily: 'var(--font-mono)',
+            fontFamily: 'var(--font-display)',
             fontSize: '10px',
             color: 'rgba(255,255,255,0.3)',
             letterSpacing: '0.08em',

@@ -27,7 +27,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
     <>
       <style>{`
         /* Mobile: three rows */
-        .tb { border-bottom: 1px solid var(--border); background: var(--canvas); position: sticky; top: 52px; z-index: 10; }
+        .tb { border-bottom: 1px solid var(--border); background: var(--canvas); position: sticky; top: 60px; z-index: 10; }
         .tb-row1 { display: flex; align-items: center; gap: 8px; padding: 0 24px; height: 64px; max-width: 1280px; margin: 0 auto; }
         .tb-row2 { display: flex; align-items: center; gap: 10px; padding: 0 24px 12px; max-width: 1280px; margin: 0 auto; }
         .tb-row3 { padding: 0 24px 12px; max-width: 1280px; margin: 0 auto; }
@@ -55,7 +55,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
                 key={s}
                 onClick={() => onStyleChange(s)}
                 style={{
-                  fontFamily: 'var(--font-mono)',
+                  fontFamily: 'var(--font-display)',
                   fontSize: '11px',
                   letterSpacing: '0.06em',
                   padding: '0 14px',
@@ -69,7 +69,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
                   textTransform: 'uppercase',
                 }}
               >
-                {s}
+                {s === 'Stroke' ? 'Outline' : s}
               </button>
             ))}
           </div>
@@ -77,7 +77,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
           {/* Divider + size control — desktop only */}
           <div className="tb-size-inline" style={{ display: 'none', alignItems: 'center', gap: '10px', marginLeft: '12px' }}>
             <div style={{ width: '1px', height: '20px', background: 'var(--border)', marginRight: '4px', flexShrink: 0 }} />
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--ink-3)', letterSpacing: '0.05em', textTransform: 'uppercase', flexShrink: 0 }}>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: '10px', color: 'var(--ink-3)', letterSpacing: '0.05em', textTransform: 'uppercase', flexShrink: 0 }}>
               Size
             </span>
             <div style={{ position: 'relative', width: '100px', height: '10px', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
@@ -85,7 +85,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
               <div style={{ position: 'absolute', left: 0, height: '1px', width: `${pct}%`, background: 'var(--accent)', borderRadius: '1px' }} />
               <input type="range" min={20} max={64} step={4} value={size} onChange={(e) => onSizeChange(Number(e.target.value))} style={{ position: 'absolute', left: 0, right: 0, width: '100%', margin: 0 }} />
             </div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink)', letterSpacing: '0.03em', minWidth: '36px', flexShrink: 0 }}>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: '11px', color: 'var(--ink)', letterSpacing: '0.03em', minWidth: '36px', flexShrink: 0 }}>
               {size}px
             </span>
           </div>
@@ -102,7 +102,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
               placeholder="Search 313 icons…"
               defaultValue={query}
               onChange={handleQueryChange}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.03em', paddingLeft: '30px', paddingRight: '12px', height: '36px', width: '220px', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--canvas-2)', color: 'var(--ink)', outline: 'none' }}
+              style={{ fontFamily: 'var(--font-display)', fontSize: '11px', letterSpacing: '0.03em', paddingLeft: '30px', paddingRight: '12px', height: '36px', width: '220px', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--canvas-2)', color: 'var(--ink)', outline: 'none' }}
               onFocus={(e) => { e.target.style.borderColor = 'var(--ink-2)'; e.target.style.background = 'var(--canvas)'; }}
               onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.background = 'var(--canvas-2)'; }}
             />
@@ -111,7 +111,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
 
         {/* Row 2: size slider — mobile only */}
         <div className="tb-row2">
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--ink-3)', letterSpacing: '0.05em', textTransform: 'uppercase', flexShrink: 0 }}>
+          <span style={{ fontFamily: 'var(--font-display)', fontSize: '10px', color: 'var(--ink-3)', letterSpacing: '0.05em', textTransform: 'uppercase', flexShrink: 0 }}>
             Size
           </span>
           <div style={{ position: 'relative', flex: 1, height: '10px', display: 'flex', alignItems: 'center' }}>
@@ -119,7 +119,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
             <div style={{ position: 'absolute', left: 0, height: '1px', width: `${pct}%`, background: 'var(--accent)', borderRadius: '1px' }} />
             <input type="range" min={20} max={64} step={4} value={size} onChange={(e) => onSizeChange(Number(e.target.value))} style={{ position: 'absolute', left: 0, right: 0, width: '100%', margin: 0 }} />
           </div>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--ink)', letterSpacing: '0.03em', minWidth: '36px', flexShrink: 0 }}>
+          <span style={{ fontFamily: 'var(--font-display)', fontSize: '11px', color: 'var(--ink)', letterSpacing: '0.03em', minWidth: '36px', flexShrink: 0 }}>
             {size}px
           </span>
         </div>
@@ -135,7 +135,7 @@ export default function Toolbar({ style, size, query, onStyleChange, onSizeChang
               placeholder="Search 313 icons…"
               defaultValue={query}
               onChange={handleQueryChange}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.03em', paddingLeft: '30px', paddingRight: '12px', height: '36px', width: '100%', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--canvas-2)', color: 'var(--ink)', outline: 'none' }}
+              style={{ fontFamily: 'var(--font-display)', fontSize: '11px', letterSpacing: '0.03em', paddingLeft: '30px', paddingRight: '12px', height: '36px', width: '100%', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', background: 'var(--canvas-2)', color: 'var(--ink)', outline: 'none' }}
               onFocus={(e) => { e.target.style.borderColor = 'var(--ink-2)'; e.target.style.background = 'var(--canvas)'; }}
               onBlur={(e) => { e.target.style.borderColor = 'var(--border)'; e.target.style.background = 'var(--canvas-2)'; }}
             />

@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, DM_Mono } from "next/font/google";
+import { DM_Mono } from "next/font/google";
 import "./globals.css";
-
-const instrumentSans = Instrument_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
 
 const dmMono = DM_Mono({
   subsets: ["latin"],
@@ -29,7 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${dmMono.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@400..800&display=swap" rel="stylesheet" />
+      </head>
       <body>{children}</body>
     </html>
   );
