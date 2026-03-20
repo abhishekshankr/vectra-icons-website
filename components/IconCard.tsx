@@ -53,7 +53,7 @@ export default function IconCard({ icon, style, size, onClick }: Props) {
 
       <span style={{
         fontFamily: 'var(--font-mono)',
-        fontSize: '9.5px',
+        fontSize: '10px',
         color: 'var(--ink-3)',
         letterSpacing: '0.02em',
         maxWidth: '80px',

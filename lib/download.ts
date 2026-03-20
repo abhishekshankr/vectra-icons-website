@@ -1,7 +1,7 @@
 import { IconStyle } from './types';
 import { getSvgUrl } from './data';
 
-function resizeSvg(svgText: string, size: number): string {
+export function resizeSvg(svgText: string, size: number): string {
   const doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
   const svg = doc.documentElement;
   svg.setAttribute('width', String(size));

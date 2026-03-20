@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react';
 import { IconRecord, IconStyle } from '@/lib/types';
 import { getSvgUrl } from '@/lib/data';
-import { downloadIcon } from '@/lib/download';
+import { downloadIcon, resizeSvg } from '@/lib/download';
 import { applyCurrentColor } from '@/lib/svgCache';
 
 interface Props {
@@ -51,12 +51,14 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
 
   const handleCopy = async () => {
     if (!svgText) return;
-    await navigator.clipboard.writeText(svgText);
+    await navigator.clipboard.writeText(resizeSvg(svgText, size));
     setToast(true);
     setTimeout(() => setToast(false), 2000);
   };
 
   if (!displayIcon) return null;
+
+  const dlDisabled = downloading || !svgText;
 
   return (
     <>
@@ -240,7 +242,7 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                 {/* Download */}
                 <button
                   onClick={handleDownload}
-                  disabled={downloading || !svgText}
+                  disabled={dlDisabled}
                   style={{
                     flex: 1,
                     height: '36px',
@@ -250,9 +252,9 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                     textTransform: 'uppercase',
                     border: 'none',
                     borderRadius: 'var(--radius-sm)',
-                    background: downloading || !svgText ? 'var(--ink-3)' : 'var(--accent)',
+                    background: dlDisabled ? 'var(--ink-3)' : 'var(--accent)',
                     color: 'white',
-                    cursor: downloading || !svgText ? 'not-allowed' : 'pointer',
+                    cursor: dlDisabled ? 'not-allowed' : 'pointer',
                     transition: 'background 0.15s ease',
                     display: 'flex',
                     alignItems: 'center',
@@ -261,8 +263,8 @@ export default function IconDetailModal({ icon, style, size, onClose }: Props) {
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                   }}
-                  onMouseEnter={(e) => { if (!downloading && svgText) (e.currentTarget.style.background = 'var(--accent-dim)'); }}
-                  onMouseLeave={(e) => { if (!downloading && svgText) (e.currentTarget.style.background = 'var(--accent)'); }}
+                  onMouseEnter={(e) => { if (!dlDisabled) (e.currentTarget.style.background = 'var(--accent-dim)'); }}
+                  onMouseLeave={(e) => { if (!dlDisabled) (e.currentTarget.style.background = 'var(--accent)'); }}
                 >
                   {!downloading && (
                     <svg width="13" height="13" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>

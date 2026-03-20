@@ -161,6 +161,40 @@ export default function Gallery({ icons }: Props) {
         size={size}
         onClose={() => setSelectedIcon(null)}
       />
+
+      <footer style={{
+        borderTop: '1px solid var(--border)',
+        padding: '20px 24px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        maxWidth: '1280px',
+        width: '100%',
+        margin: '0 auto',
+        boxSizing: 'border-box',
+      }}>
+        <span style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: '11px',
+          color: 'var(--ink-3)',
+          letterSpacing: '0.03em',
+        }}>
+          © {new Date().getFullYear()} Vectra Icons · MIT License
+        </span>
+        <a
+          href="https://github.com/abhishekshankr/vectra-icons"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          style={{ color: 'var(--ink-3)', display: 'flex', alignItems: 'center', transition: 'color 0.15s ease' }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)'; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-3)'; }}
+        >
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" clipRule="evenodd" d="M8.5 3a7.5 7.5 0 0 1 6.002 3h2.996A7.5 7.5 0 0 1 23.5 3a1 1 0 0 1 .866.5 7.489 7.489 0 0 1 .672 5.962 7.16 7.16 0 0 1 .962 3.53V14a7 7 0 0 1-6.05 6.935A4.978 4.978 0 0 1 21 24v5a1 1 0 1 1-2 0v-5a3 3 0 1 0-6 0v5a1 1 0 1 1-2 0v-2h-1a5 5 0 0 1-5-5 3 3 0 0 0-3-3 1 1 0 1 1 0-2 5 5 0 0 1 5 5 3 3 0 0 0 3 3h1v-1c0-1.155.392-2.218 1.05-3.065A7 7 0 0 1 6 14v-1.008a7.16 7.16 0 0 1 .962-3.53A7.49 7.49 0 0 1 7.634 3.5 1 1 0 0 1 8.5 3ZM19 19h-6a5 5 0 0 1-5-5v-.996a5.16 5.16 0 0 1 .891-2.855 1 1 0 0 0 .106-.922 5.49 5.49 0 0 1 .099-4.195 5.5 5.5 0 0 1 4.04 2.506A1 1 0 0 0 13.98 8h4.042a1 1 0 0 0 .843-.462 5.5 5.5 0 0 1 4.04-2.506 5.491 5.491 0 0 1 .1 4.195 1 1 0 0 0 .105.922 5.16 5.16 0 0 1 .89 2.855V14a5 5 0 0 1-5 5Z" fill="currentColor" />
+          </svg>
+        </a>
+      </footer>
     </div>
   );
 }
